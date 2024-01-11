@@ -1,0 +1,7 @@
+﻿
+            hostBuilder.ConfigureAppConfiguration(hostConfig =>
+          {
+              hostConfig.SetBasePath(Directory.GetCurrentDirectory());
+              hostConfig.AddJsonFile("hostsettings.json");
+              hostConfig.AddEnvironmentVariables(prefix: "PREFIX_");
+          });

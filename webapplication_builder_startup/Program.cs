@@ -10,9 +10,7 @@
                     webBuilder.UseStartup<Startup>();
                 });
 
-            hostBuilder
-                .Build()
-                .Run();
+            hostBuilder.Build().Run();
         }
     }
 }

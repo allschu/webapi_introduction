@@ -10,6 +10,7 @@ namespace webapplication_builder
             
             var host = builder.Build();
 
+            //minimal API example
             host.MapGet("/hello", () => "world");
 
             host.Run();

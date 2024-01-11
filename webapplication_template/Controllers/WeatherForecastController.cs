@@ -1,16 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using webapplication_template.DTO;
 
 namespace webapplication_template.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("WeatherForecasts")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<WeatherForecastController> _logger;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
@@ -29,5 +25,32 @@ namespace webapplication_template.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetWeather(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        public IActionResult PostWeather(CreateWeatherRequest request, CancellationToken cancellationToken = default)
+        {
+            //Do any logic to store the weather request
+            const int weatherId = 2; //Fake the id
+
+            var location = this.Url.Action(nameof(GetWeather), new { id = weatherId }) ?? $"/{weatherId}";
+
+            //return a HTTP 201 result
+            return Created(location, weatherId);
+        }
+
+        #region private
+
+        private static readonly string[] Summaries = new[]
+        {
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
+
+        #endregion
     }
 }
